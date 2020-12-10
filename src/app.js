@@ -25,30 +25,23 @@ app.get("/", (req, res) => {
   res.send({ res: "Prashant" });
 });
 
-
-app.get("/mario",(req, res) => {
-    let temp = [];
-    Mario.find().then((mario) => {
-        mario.map(eachMario => (
-            temp.push(eachMario.name)
-        ))
-    })
-    res.send(temp);
+app.get("/mario", (req, res) => {
+  Mario.find().then((mario) => {
+    mario.map((eachMario) => temp.push(eachMario.name));
+  });
+  res.send(temp);
 });
 
-app.get("/mario':id", (req, res) => {
-    const id = req.params.id;
-    Mario.findById({id}).then((char) => {
-        if(!char){
-            res.status(400).send({message: "error.message"});
-        }
-        else{
-            res.send(char);
-        }
-    })
+app.get("/mario/:id", (req, res) => {
+  const id = req.params.id;
+  Mario.findById({ id }).then((char) => {
+    if (!char) {
+      res.status(400).send({ message: "error.message" });
+    } else {
+      res.send(char);
+    }
+  });
 });
-
-
 
 app.post("/mario", (req, res) => {
   let { name, weight } = req.body;
